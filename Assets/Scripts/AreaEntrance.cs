@@ -12,6 +12,7 @@ public class AreaEntrance : MonoBehaviour
         if(PlayerController.instance)
             if (transitionName == PlayerController.instance.areaTransitionName)
         {
+                UITransition.instance.fadeFromBlack();
             PlayerController.instance.transform.position = gameObject.transform.position;
         }
     }

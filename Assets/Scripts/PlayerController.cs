@@ -14,11 +14,13 @@ public class PlayerController : MonoBehaviour
 
     public string areaTransitionName;
 
+    private Vector3 bottomLeftLimit, topRightLimit;
+
     void Start()
     {
         if (instance == null)
             instance = this;
-        else
+        else if(instance != this)
             Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
     }
@@ -36,5 +38,15 @@ public class PlayerController : MonoBehaviour
             myAnim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
             myAnim.SetFloat("lastMoveY", Input.GetAxisRaw("Vertical"));
         }
+
+        //keep player inside bounds
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimit.x, topRightLimit.x),
+            Mathf.Clamp(transform.position.y, bottomLeftLimit.y, topRightLimit.y), transform.position.z);
+    }
+
+        public void setBounds( Vector3 bottomLeftLimit, Vector3 topRightLimit)
+    {
+        this.bottomLeftLimit = bottomLeftLimit + new Vector3(1f, 1f, 0);
+        this.topRightLimit = topRightLimit + new Vector3(-1f, -1f, 0);
     }
 }
