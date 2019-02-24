@@ -24,6 +24,7 @@ public class AreaExit : MonoBehaviour
         if (loadDelay <= 0)
         {
             shouldLoadAfterFade = false;
+            GameManager.instance.fadingBetAreas = true;
             SceneManager.LoadScene(areaToLoad);
         }
     }

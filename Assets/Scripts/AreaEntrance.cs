@@ -13,6 +13,7 @@ public class AreaEntrance : MonoBehaviour
             if (transitionName == PlayerController.instance.areaTransitionName)
         {
                 UITransition.instance.fadeFromBlack();
+                GameManager.instance.fadingBetAreas = false;
             PlayerController.instance.transform.position = gameObject.transform.position;
         }
     }
