@@ -34,7 +34,7 @@ public class DialogManager : MonoBehaviour
                     if (curLine >= dialogLines.Length)
                     {
                         dialogBox.SetActive(false);
-                        PlayerController.instance.canMove = true;
+                        GameManager.instance.dialogActive = false;
                         firstStart = true;
                     }
                     else
@@ -56,7 +56,7 @@ public class DialogManager : MonoBehaviour
         dialogLines = theLines;
         curLine = 0;
         CheckIfName();
-        PlayerController.instance.canMove = false;
+        GameManager.instance.dialogActive = true;
         dialogText.text = dialogLines[curLine];
         dialogBox.SetActive(true);
 
