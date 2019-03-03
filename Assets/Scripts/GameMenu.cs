@@ -17,10 +17,20 @@ public class GameMenu : MonoBehaviour
     public Text statusName, statusHP, statusMP, statusStr, statusDef, statusEqpWpn, statusWpnPwr, statusEqpArm, statusArmPwr, statusExp;
     public Image statusImage;
 
+    public ItemButton[] itemButtons;
+    public string selectedItem;
+    public Item activeItem;
+    public Text itemName, itemDescription, useBtnText;
+
+    public GameObject itemCharChoiceMenu;
+    public Text[] itemCharChoiceNames;
+
+    public static GameMenu instance;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame
@@ -80,6 +90,8 @@ public class GameMenu : MonoBehaviour
                 windows[i].SetActive(false);
             }
         }
+
+        itemCharChoiceMenu.SetActive(false);
     }
 
     public void CloseMenu()
@@ -90,6 +102,7 @@ public class GameMenu : MonoBehaviour
         }
         theMenu.SetActive(false);
         GameManager.instance.gameMenuOpen = false;
+        itemCharChoiceMenu.SetActive(false);
     }
 
     public void OpenStatus()
@@ -107,8 +120,8 @@ public class GameMenu : MonoBehaviour
     public void StatusChar(int selected)
     {
         statusName.text = playerStats[selected].charName;
-        statusHP.text = playerStats[selected].curHP.ToString();
-        statusMP.text = playerStats[selected].curMP.ToString();
+        statusHP.text = playerStats[selected].curHP.ToString() + "/" + playerStats[selected].maxHP.ToString();
+        statusMP.text = playerStats[selected].curMP.ToString() + "/" + playerStats[selected].maxMP.ToString();
         statusStr.text = playerStats[selected].strength.ToString();
         statusDef.text = playerStats[selected].defense.ToString();
         statusWpnPwr.text = playerStats[selected].weaponPower.ToString();
@@ -125,5 +138,74 @@ public class GameMenu : MonoBehaviour
         statusArmPwr.text = playerStats[selected].armorPower.ToString();
         statusExp.text = (playerStats[selected].expToNextLevel[playerStats[selected].playerLevel] - playerStats[selected].currentExp).ToString();
         statusImage.sprite = playerStats[selected].charImage;
+    }
+
+    public void ShowItems()
+    {
+        GameManager.instance.SortItems();
+
+        for(int i = 0; i < itemButtons.Length; i++)
+        {
+            itemButtons[i].buttonValue = i;
+
+            if(GameManager.instance.itemsHeld[i] != "")
+            {
+                itemButtons[i].buttonImage.gameObject.SetActive(true);
+                itemButtons[i].buttonImage.sprite = GameManager.instance.GetItemDetails(GameManager.instance.itemsHeld[i]).itemSprite;
+                itemButtons[i].amtText.text = GameManager.instance.noOfItems[i].ToString();
+            } else
+            {
+                itemButtons[i].buttonImage.gameObject.SetActive(false);
+                itemButtons[i].amtText.text = "";
+            }
+        }
+    }
+
+    public void SelectItem(Item newItem)
+    {
+        activeItem = newItem;
+
+        if (activeItem.isItem)
+        {
+            useBtnText.text = "Use";
+        }
+
+        if(activeItem.isWeapon || activeItem.isArmor)
+        {
+            useBtnText.text = "Equip";
+        }
+
+        itemName.text = activeItem.itemName;
+        itemDescription.text = activeItem.desc;
+    }
+
+    public void DiscardItem()
+    {
+        if(activeItem != null)
+        {
+            GameManager.instance.RemoveItem(activeItem.itemName);
+        }
+    }
+
+    public void OpenItemCharChoice()
+    {
+        itemCharChoiceMenu.SetActive(true);
+
+        for(int i=0;i<itemCharChoiceNames.Length; i++)
+        {
+            itemCharChoiceNames[i].text = GameManager.instance.playerStats[i].charName;
+            itemCharChoiceNames[i].transform.parent.gameObject.SetActive(GameManager.instance.playerStats[i].gameObject.activeInHierarchy);
+        }
+    }
+
+    public void CloseItemCharChoice()
+    {
+        itemCharChoiceMenu.SetActive(false);
+    }
+
+    public void UseItem(int selectChar)
+    {
+        activeItem.Use(selectChar);
+        CloseItemCharChoice();
     }
 }
