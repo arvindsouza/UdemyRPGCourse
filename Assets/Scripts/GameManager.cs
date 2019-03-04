@@ -6,10 +6,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public bool gameMenuOpen, dialogActive, fadingBetAreas;
+    public bool gameMenuOpen, dialogActive, fadingBetAreas, shopActive;
     public string[] itemsHeld;
     public int[] noOfItems;
     public Item[] referenceItems;
+
+    public int curGold;
 
 
     public CharStats[] playerStats;
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameMenuOpen || dialogActive || fadingBetAreas)
+        if (gameMenuOpen || dialogActive || fadingBetAreas || shopActive)
             PlayerController.instance.canMove = false;
         else
             PlayerController.instance.canMove = true;
