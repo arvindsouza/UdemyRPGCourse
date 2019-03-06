@@ -48,3 +48,5 @@ MonoBehaviour:
   player: {fileID: 2439907504141607536, guid: 6a8832fb9f372e24fbbfc2a14bfbb1b7, type: 3}
   gameManager: {fileID: 6988143975551515097, guid: db861a12526e8fc44b24f42ac4649c3e,
     type: 3}
+  audioManager: {fileID: 7569558530120051186, guid: 8d4d275bb82a0ce448a34bcb778cabe2,
+    type: 3}

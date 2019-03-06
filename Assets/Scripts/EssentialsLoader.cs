@@ -5,19 +5,21 @@ using UnityEngine;
 public class EssentialsLoader : MonoBehaviour
 {
 
-    public GameObject uiScreen, player, gameManager;
+    public GameObject uiScreen, player, gameManager, audioManager;
 
     // Start is called before the first frame update
     void Start()
     {
-      if(UITransition.instance == null)
-           UITransition.instance = Instantiate(uiScreen).GetComponent<UITransition>();
+        if (UITransition.instance == null)
+            Instantiate(uiScreen);
 
         if (PlayerController.instance == null)
-           PlayerController.instance = Instantiate(player).GetComponent<PlayerController>();
-
+            Instantiate(player);
         if (GameManager.instance == null)
             Instantiate(gameManager);
+
+        if (AudioManager.instance == null)
+            Instantiate(audioManager);
  
     }
 

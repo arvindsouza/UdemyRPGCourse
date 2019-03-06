@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMenu : MonoBehaviour
@@ -29,6 +30,8 @@ public class GameMenu : MonoBehaviour
 
     public static GameMenu instance;
 
+    public string mainMenuScene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,8 @@ public class GameMenu : MonoBehaviour
                 updateMainStats();
                 GameManager.instance.gameMenuOpen = true;
             }
+
+            AudioManager.instance.PlaySFX(5);
         }
     }
 
@@ -217,5 +222,19 @@ public class GameMenu : MonoBehaviour
     {
         GameManager.instance.SaveData();
         QuestManager.instance.SaveQuestData();
+    }
+
+    public void PlayButtonSound()
+    {
+        AudioManager.instance.PlaySFX(4);
+    }
+
+    public void QuitGame()
+    {
+        SceneManager.LoadScene(mainMenuScene);
+        Destroy(GameManager.instance.gameObject);
+        Destroy(PlayerController.instance.gameObject);
+        Destroy(AudioManager.instance.gameObject);
+        Destroy(gameObject);
     }
 }
