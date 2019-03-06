@@ -71,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6988143975551515099}
   - component: {fileID: 6988143975551515096}
+  - component: {fileID: 6988143975175261467}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -165,6 +166,25 @@ MonoBehaviour:
   - {fileID: 6988143976256189899}
   - {fileID: 6988143975221905644}
   - {fileID: 6988143975685539249}
+--- !u!114 &6988143975175261467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6988143975551515097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64fa26455a4b9840af7685c390456a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questMarkerNames:
+  - 
+  - Fight demon
+  - Enter cave
+  - do stuff
+  - do more stuff
+  questMarkersComplete: 
 --- !u!1 &6988143975685539262
 GameObject:
   m_ObjectHideFlags: 0
