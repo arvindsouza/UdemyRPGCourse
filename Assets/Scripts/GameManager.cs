@@ -7,7 +7,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public bool gameMenuOpen, dialogActive, fadingBetAreas, shopActive;
+    public bool gameMenuOpen, dialogActive, fadingBetAreas, shopActive, battleActive;
     public string[] itemsHeld;
     public int[] noOfItems;
     public Item[] referenceItems;
@@ -32,10 +32,10 @@ public class GameManager : MonoBehaviour
             LoadData();
         }
 
-        if (gameMenuOpen || dialogActive || fadingBetAreas || shopActive)
+        if (gameMenuOpen || dialogActive || fadingBetAreas || shopActive || battleActive)
             PlayerController.instance.canMove = false;
-        else
-            PlayerController.instance.canMove = true;
+       else
+           PlayerController.instance.canMove = true;
     }
 
     public Item GetItemDetails(string itemToGrab)

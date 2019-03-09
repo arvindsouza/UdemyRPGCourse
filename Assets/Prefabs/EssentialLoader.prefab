@@ -50,3 +50,5 @@ MonoBehaviour:
     type: 3}
   audioManager: {fileID: 7569558530120051186, guid: 8d4d275bb82a0ce448a34bcb778cabe2,
     type: 3}
+  battleManager: {fileID: 6679262555603635480, guid: add595cfe1637134e8b665b4e041b280,
+    type: 3}
